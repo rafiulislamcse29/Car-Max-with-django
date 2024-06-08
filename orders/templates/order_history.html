@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Order History{% endblock %} 
+
+{% block content%}
+
+<div class="container mt-5">
+  <h4 class='py-3'> Total orders :   {{orders|length}}</h4>
+  <div class="d-flex flex-wrap gap-5 justify-content-center">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">SN</th>
+          <th scope="col">Order Id</th>
+          <th scope="col">Car Model</th>
+          <th scope="col">Brand</th>
+          <th scope="col">Price</th>
+          <th scope="col">show</th>
+        </tr>
+      </thead>
+      <tbody>
+        {%for order in orders%}
+        <tr>
+          <th scope="row">{{forloop.counter}}</th>
+          <td>{{order.id}}</td>
+          <td>{{order.car.name}}</td>
+          <td>{{order.car.brand}}</td>
+          <td>{{order.car.price}}$</td>
+          <td> 
+            <a  href="{%url 'car_details' order.car.id%}"  class=" d-block btn btn-outline-info ">view</a> 
+          </td>
+        </tr>
+        {% endfor %} 
+       
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
